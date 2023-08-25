@@ -2,10 +2,12 @@ pipeline {
 	agent any
 
 	stages {
-		stage ('clone code') {
+		stage ('Initialize') {
 		      steps {
-		        git url: https://github.com/kaleanushka123/Infra-secops.git             
-		        
+			sh '''      
+		        	echo "PATH = ${PATH}"
+	   			echo "M2_HOME = ${M2_HOME}"
+       			'''
       			}
     		}
             stage ('Check Secrets') {
