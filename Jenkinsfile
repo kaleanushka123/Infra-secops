@@ -21,6 +21,13 @@ pipeline {
  			sh 'mvn clean install -DskipTests'
 			}
  		}
+		stage ('Fetch Application server') {
+   		     steps {
+ 			     sshagent(['application_server']) {
+ 			sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline_webgoat_devsecops/target/webgoatserver-v8.2.0.jar ubuntu@3.109.210.22:~/WebGoat'
+				 }
+			       }
+                         }
  	stage ('Deploy to server') {
             steps {
  		    timeout(time: 4, unit: 'MINUTES') {
@@ -35,7 +42,7 @@ pipeline {
  	 stage ('Dynamic analysis') {
             steps {
           	  sshagent(['application_server']) {
-            sh 'ssh -o  StrictHostKeyChecking=no ubuntu@18.212.157.207 "sudo docker run --rm -v /home/ubuntu:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://3.109.210.22:8080/WebGoat -x zap_report || true" '
+            sh 'ssh -o  StrictHostKeyChecking=no ubuntu@18.212.157.207 "sudo docker run --rm -v /home/ubuntu:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://3.109.210.22:8081/WebGoat -x zap_report || true" '
 			
                   }      
             }       
