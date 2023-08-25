@@ -31,7 +31,7 @@ pipeline {
  	stage ('Deploy to server') {
             steps {
  		    timeout(time: 4, unit: 'MINUTES') {
-	        	   sshagent(['application-server']) {
+	        	   sshagent(['application_server']) {
                 sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/webgoat-devsecops/webgoat-server/target/webgoat-server-v8.2.0-SNAPSHOT.jar ubuntu@3.109.210.22:/WebGoat'
  				
            		}
