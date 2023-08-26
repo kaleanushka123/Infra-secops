@@ -21,13 +21,13 @@ pipeline {
  			sh 'mvn clean install -DskipTests'
 			}
  		}
-		stage ('Fetch Application server') {
-   		     steps {
- 			     sshagent(['ubuntu-server']) {
- 			sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline_webgoat_devsecops/target/webgoatserver-v8.2.0.jar ubuntu@3.7.69.183:~/WebGoat'
-				 }
-			       }
-                         }
+	//	stage ('Fetch Application server') {
+   	//	     steps {
+ 	//		     sshagent(['ubuntu-server']) {
+ 	//		sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline_webgoat_devsecops/target/webgoatserver-v8.2.0.jar ubuntu@3.7.69.183:~/WebGoat'
+	//			 }
+	//		       }
+        //                }
  	stage ('Deploy to server') {
             steps {
  		    timeout(time: 4, unit: 'MINUTES') {
