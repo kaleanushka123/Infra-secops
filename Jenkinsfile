@@ -42,7 +42,7 @@ pipeline {
 	
  	 stage ('Dynamic analysis') {
             steps {
-          	  sshagent(['new-key']) {
+          	  sshagent(['dast-server']) {
             sh 'ssh -o  StrictHostKeyChecking=no ubuntu@13.233.254.76 "sudo docker run --rm -v /home/ubuntu:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://13.234.115.77/WebGoat -x zap_report || true" '
 			
                   }      
