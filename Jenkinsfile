@@ -42,8 +42,8 @@ pipeline {
 	
  	 stage ('Dynamic analysis') {
             steps {
-          	  sshagent(['server-dast']) {
-            sh 'ssh -o  StrictHostKeyChecking=no ubuntu@43.205.228.25 "sudo docker run --rm -v /home/ubuntu:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://13.234.115.77/WebGoat -x zap_report || true" '
+          	  sshagent(['dast-server']) {
+            sh 'ssh -o  StrictHostKeyChecking=no ubuntu@13.233.174.224 "sudo docker run --rm -v /home/ubuntu:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://13.126.140.19/WebGoat -x zap_report || true" '
 			
                   }      
             }       
