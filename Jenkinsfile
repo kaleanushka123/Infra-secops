@@ -17,13 +17,13 @@ pipeline {
 			}
     		}
 		
-              stage ('Software composition analysis') {
+              stage ('dep-check') {
                 steps {
                        dependencyCheck additionalArguments: ''' 
                            -o "./" 
                            -s "./"
                            -f "ALL" 
-                           --prettyPrint''', odcInstallation: 'DP-Check'
+                           --prettyPrint''', odcInstallation: 'dep-check'
 
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
