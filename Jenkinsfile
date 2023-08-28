@@ -16,6 +16,19 @@ pipeline {
  			      
 			}
     		}
+		
+              stage ('Software composition analysis') {
+                steps {
+                       dependencyCheck additionalArguments: ''' 
+                           -o "./" 
+                           -s "./"
+                           -f "ALL" 
+                           --prettyPrint''', odcInstallation: 'DP-Check'
+
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+            }
+        }
+		
             stage('Compile and Build'){
  		steps{
  			sh 'mvn clean install -DskipTests'
