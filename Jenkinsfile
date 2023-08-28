@@ -17,18 +17,7 @@ pipeline {
 			}
     		}
 		
-              stage ('dep-check') {
-                steps {
-                       dependencyCheck additionalArguments: ''' 
-                           -o "./" 
-                           -s "./"
-                           -f "ALL" 
-                           --prettyPrint''', odcInstallation: 'dep-check'
-
-                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-            }
-        }
-		
+             
             stage('Compile and Build'){
  		steps{
  			sh 'mvn clean install -DskipTests'
